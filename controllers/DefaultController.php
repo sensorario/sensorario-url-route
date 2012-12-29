@@ -14,24 +14,33 @@ class DefaultController extends Controller
 
     public function actionGenerate()
     {
-
         $controllerFolder = Yii::app()->basePath . "/controllers";
         $dirHandle = opendir($controllerFolder);
         $routes = [];
         while ($controllerName = readdir($dirHandle)) {
             if(!in_array($controllerName, ['.', '..'])) {
                 require_once __DIR__ . '/../../../controllers/' . $controllerName;
-                $metodiDelController = (new ReflectionClass(explode('.', $controllerName)[0]))->getMethods();
+                $controllerNameExploded = explode('.', $controllerName);
+                $className = $controllerNameExploded[0];
+                $reflectionClass = new ReflectionClass($className);
+                $metodiDelController = $reflectionClass->getMethods();
                 foreach ($metodiDelController as $reflectionMethod) {
                     if(strpos($reflectionMethod->name, "action") === 0) {
                         if(!($reflectionMethod->name === "actions")) {
-                            $commento = (new ReflectionMethod($reflectionMethod->class, $reflectionMethod->name))->getDocComment();
+                            $reflectionMethodClass = $reflectionMethod->class;
+                            $reflectionMethodName = $reflectionMethod->name;
+                            $myReflectionMethod = new ReflectionMethod($reflectionMethodClass, $reflectionMethodName);
+                            $commento = $myReflectionMethod->getDocComment();
                             foreach (explode("\n", $commento) as $item) {
                                 if(strpos($item, "@")) {
                                     preg_match_all("/\@(.*)\((.*)=\"(.*)\"\);/", $item, $matches);
-                                    $explodedControllerName = strtolower(explode("Controller", $reflectionMethod->class)[0]);
-                                    $explodedAction = strtolower(explode("action", $reflectionMethod->name)[1]);
-                                    $routes[$matches[3][0]] = "{$explodedControllerName}/{$explodedAction}";
+                                    $explodedControllerName = explode("Controller", $reflectionMethod->class);
+                                    $controllerCamelCase = $explodedControllerName[0];
+                                    $explodedControllerNameLowered = strtolower($controllerCamelCase);
+                                    $explodedActionName = explode("action", $reflectionMethod->name);
+                                    $camelCaseAcion = $explodedActionName[1];
+                                    $explodedAction = strtolower($camelCaseAcion);
+                                    $routes[$matches[3][0]] = "{$explodedControllerNameLowered}/{$explodedAction}";
                                 }
                             }
                         }
