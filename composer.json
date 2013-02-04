@@ -1,0 +1,13 @@
+{
+    "name": "sensorario/sensorariourlroute",
+    "description": "Url rewrite using annotations.",
+    "authors": [
+        {
+            "name": "sensorario",
+            "email": "sensorario@gmail.com"
+        }
+    ],
+    "require": {
+
+    }
+}
