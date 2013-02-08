@@ -1,5 +1,5 @@
 {
-    "name": "sensorario/SensorarioUrlRoute",
+    "name": "sensorario/sensorario-url-route",
     "description": "Url rewrite using annotations.",
     "authors": [
         {
