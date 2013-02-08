@@ -1,3 +1,12 @@
+Install with composer
+---------------------
+
+    {
+        "require": {
+            "sensorario/sensorariourlroute": "1.0.1"
+        }
+    }
+
 Install
 -------
 
