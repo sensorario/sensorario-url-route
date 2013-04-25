@@ -56,3 +56,17 @@ Now, to get rout of 'homepage' route, you could use this code:
 
     ((new CreateUrl('homepage'))->getRoute()))
 
+
+Usage with parameters
+---------------------
+
+Instead of /site/hello/username/sensorario you can type url /hello/sensorario.
+
+    /**
+     * @Route(value="hello/<username:\w+>");
+     */
+    public function actionHello($username)
+    {
+      echo "Hello {$username}";
+      die;
+    }

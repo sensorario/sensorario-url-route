@@ -33,10 +33,13 @@ class DefaultController extends Controller
               $commento = (new ReflectionMethod($reflectionMethod->class, $reflectionMethod->name))->getDocComment();
               foreach(explode("\n", $commento) as $item){
                 if (strpos($item, "@")) {
-                  preg_match_all("/\@(.*)\((.*)=\"(.*)\"\);/", $item, $matches);
-                  $explodedControllerName = strtolower(explode("Controller", $reflectionMethod->class)[0]);
-                  $explodedAction = strtolower(explode("action", $reflectionMethod->name)[1]);
-                  $routes[$matches[3][0]] = "{$explodedControllerName}/{$explodedAction}";
+                  preg_match_all("/\@Route\(value=\"(.*)\"\);/", $item, $matches);
+                  if (isset($matches[1][0])) {
+                    $class = $reflectionMethod->class;
+                    $explodedControllerName = strtolower(explode("Controller", $class)[0]);
+                    $explodedAction = strtolower(explode("action", $reflectionMethod->name)[1]);
+                    $routes[$matches[1][0]] = "{$explodedControllerName}/{$explodedAction}";
+                  }
                 }
               }
             }
