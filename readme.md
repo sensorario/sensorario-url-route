@@ -66,6 +66,6 @@ Instead of /site/hello/username/sensorario you can type url /hello/sensorario.
      */
     public function actionHello($username)
     {
-      echo "Hello {$username}";
+      echo "Hello $username";
       die;
     }
