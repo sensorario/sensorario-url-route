@@ -12,7 +12,6 @@ I suggest to install this module using composer.
       ...
     }
 
-
 Load SensorarioUrlRoute module in config/main.php configuration file:
 
     'sensorariourlroute' => array(
