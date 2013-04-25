@@ -1,13 +1,14 @@
 {
-    "name": "sensorario/sensorario-url-route",
-    "description": "Url rewrite using annotations.",
-    "authors": [
-        {
-            "name": "sensorario",
-            "email": "sensorario@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.0"
+  "name": "sensorario/sensorario-url-route",
+  "description": "Url rewrite using annotations.",
+  "authors": [
+    {
+      "name": "sensorario",
+      "email": "sensorario@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  }
 }
+

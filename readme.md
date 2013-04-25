@@ -1,28 +1,31 @@
-Install with composer
----------------------
-
-    {
-        "require": {
-            "sensorario/sensorariourlroute": "1.0.1"
-        }
-    }
-
 Install
 -------
 
+I suggest to install this module using composer.
+
+    {
+      ...
+      "require": {
+        ...
+        "sensorario/sensorariourlroute": "@dev"
+      }
+      ...
+    }
+
+
 Load SensorarioUrlRoute module in config/main.php configuration file:
 
-    'modules' => array(
-        'SensorarioUrlRoute',
+    'sensorariourlroute' => array(
+      'class' => 'webroot.vendor.sensorario.sensorariourlroute.SensorarioUrlRouteModule',
     ),
 
 Enable URLs in path format:
 
     'components' => array(
-        'urlManager' => array(
-            'urlFormat' => 'path',
-            'rules' => require __DIR__ . '/../modules/SensorarioUrlRoute/routing.php',
-        ),
+      'urlManager' => array(
+        'urlFormat' => 'path',
+        'rules' => require 'routing.php',
+      ),
     ),
 
 Usage
@@ -31,13 +34,15 @@ Usage
 Add annotations in DocComments of actions:
 
     class SiteController extends Controller
-        /**
-         * @Route(name="homepage");
-         */
-        public function actionIndex()
-        {
-            $this->render('index');
-        }
+
+      /**
+       * @Route(name="homepage");
+       */
+      public function actionIndex()
+      {
+        $this->render('index');
+      }
+
     }
 
 Go to index.php/SensorarioUrlRoute and click on "Generate routing file". A file
